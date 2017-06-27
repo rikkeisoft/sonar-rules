@@ -31,7 +31,7 @@ class AppServiceProvider implements ServiceProviderInterface
 
             // Extend Twig
             $twig->addFilter(new Twig_Filter('idformat', function ($string) {
-                return preg_replace('/\:/','-', $string);
+                return preg_replace('/\:/', '-', $string);
             }));
 
             return $twig;
