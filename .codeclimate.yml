@@ -1,0 +1,26 @@
+engines:
+  fixme:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - php
+  phpcodesniffer:
+    enabled: true
+  phpmd:
+    enabled: true
+    checks:
+      Naming/ShortVariable:
+        enabled: false
+      CleanCode/StaticAccess:
+        enabled: false
+      CleanCode/ElseExpression:
+        enabled: false
+
+ratings:
+  paths:
+    - "**.php"
+
+exclude_paths:
+  - vendor/**/*

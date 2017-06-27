@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$app = new \Lemon\Cli\App('Make documents about Sonar rules', '1.0.0');
+$app->register(new \App\AppServiceProvider());
+$app->addCommand(new \App\Commands\ListRulesCommand());
+
+$app->run();

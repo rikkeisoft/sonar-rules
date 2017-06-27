@@ -1,0 +1,72 @@
+{% extends "layouts/default.html.twig" %}
+
+{% block custom_style %}
+<style>
+    pre {
+        background: lightgoldenrodyellow;
+        padding: 10px;
+    }
+    .rule-item { margin-bottom: 3em }
+    .rule-meta { padding-bottom: 0.5em }
+    .rule-desc {
+        border-left: 2px solid #ccc;
+        padding-left: 1.2em;
+    }
+    .rule-desc h2 { font-size: 1.5em }
+    .sidebar li {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-8 rule-list">
+
+                <div class="page-header">
+                    <h1 class="page-title">The Sonar rules</h1>
+                    <p class="lead page-description">List all Sonar rules</p>
+                </div><!-- /.page-header -->
+
+                <hr>
+
+                {% for rule in data.rules %}
+                    {% block rule_item %}
+                        <div class="rule-item" id="{{ rule.key | idformat }}">
+                            <h2 class="rule-name">{{ rule.name }}</h2>
+                            <div class="rule-meta">
+                                <span class="badge badge-default rule-key">{{ rule.key }}</span>
+                                <span class="badge badge-default rule-repo">{{ rule.repo }}</span>
+                                <span class="badge badge-default rule-type">{{ rule.type }}</span>
+                                <span class="badge badge-default rule-status">{{ rule.status }}</span>
+                            </div>
+                            <div class="clearfix rule-desc">
+                                {{ rule.htmlDesc | raw }}
+                            </div>
+                        </div><!-- /.rule-item -->
+                    {% endblock %}
+                {% endfor %}
+            </div><!-- /.rule-list -->
+
+            <div class="col-sm-3 offset-sm-1 sidebar sticky-top">
+                <div class="sidebar-module sidebar-module-inset">
+                    <h4>All rules: {{ data.rules | length }}</h4>
+                </div>
+                <div class="sidebar-module">
+                    <h4>Javascripts</h4>
+                    <ol class="list-unstyled">
+                        {% for rule in data.rules %}
+                            <li><a href="#{{ rule.key | idformat }}">{{ rule.name }}</a></li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div><!-- /.-sidebar -->
+
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+{% endblock %}

@@ -1,0 +1,44 @@
+{
+  "name": "rikkeisoft/sonar-rules",
+  "description": "Make documents about Sonar rules",
+  "keywords": ["cli", "api", "sonar", "rules"],
+  "type": "application",
+  "license": "MIT",
+  "homepage": "https://github.com/rikkeisoft/sonar-rules",
+  "support": {
+    "issues": "https://github.com/rikkeisoft/sonar-rules/issues",
+    "source": "https://github.com/rikkeisoft/sonar-rules"
+  },
+  "authors": [
+    {
+      "name": "Oanh Nguyen",
+      "email": "oanhnn.bk@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "guzzlehttp/guzzle": "^6.3",
+    "lemonphp/cli": "^0.2.0",
+    "twig/twig": "^2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.0",
+    "squizlabs/php_codesniffer": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "bin": ["bin/sonardoc"],
+  "scripts": {
+    "phpunit": "php vendor/phpunit/phpunit/phpunit --coverage-html build/",
+    "phpcs": "php vendor/squizlabs/php_codesniffer/bin/phpcs",
+    "phpcbf": "php vendor/squizlabs/php_codesniffer/bin/phpcbf"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
