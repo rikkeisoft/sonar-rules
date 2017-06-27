@@ -17,6 +17,11 @@ class ListRulesCommand extends Command
     protected $name = 'rules:list';
 
     /**
+     * @var string
+     */
+    protected $apiEndpoint = '/api/rules/search';
+
+    /**
      * Configures the current command.
      */
     protected function configure()
@@ -49,6 +54,8 @@ class ListRulesCommand extends Command
             'format' => 'json',
             'f' => implode(',', ['repo', 'name', 'htmlDesc', 'htmlNote', 'status']),
             'ps' => 500,
+            's' => 'key',
+            'asc' => 'true',
         ];
 
         if ($input->hasOption('languages')) {
@@ -58,7 +65,7 @@ class ListRulesCommand extends Command
         $user = $input->getOption('user');
         $password = $input->getOption('password');
 
-        $response = $client->request('GET', $baseUri . '/api/rules/search?' . http_build_query($query), [
+        $response = $client->get($baseUri . $this->apiEndpoint . '?' . http_build_query($query), [
             'auth' => [$user, $password],
         ]);
 
@@ -70,7 +77,7 @@ class ListRulesCommand extends Command
             return 1;
         }
 
-        if (strpos((string) $response->getHeaderLine('Content-Type'), 'json') === false) {
+        if (strpos((string)$response->getHeaderLine('Content-Type'), 'json') === false) {
             if ($output->isDebug()) {
                 $output->writeln("<error>Response content type: {$response->getHeaderLine('Content-Type')}</error>");
             }
@@ -88,14 +95,15 @@ class ListRulesCommand extends Command
             return 3;
         }
 
-        /** @var \Twig_Environment $renderer */
-        $renderer = $this->getContainer()['renderer'];
-        $doc = $renderer->render('list_rules.html.twig', compact('data'));
-
         $file = $input->getOption('outfile');
-
         if (!file_exists(dirname($file))) {
             mkdir(dirname($file));
+        }
+
+        if (strtolower($input->getOption('format')) === 'csv') {
+            $doc = $this->createCsv($data);
+        } else {
+            $doc = $this->createHtml($data);
         }
 
         if (!file_put_contents($file, $doc)) {
@@ -121,9 +129,41 @@ class ListRulesCommand extends Command
         return new InputDefinition([
             new InputOption('languages', 'l', InputOption::VALUE_OPTIONAL, 'Filter by languages'),
             new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', getcwd() . '/build/file.html'),
+            new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'Format', 'html'),
             new InputOption('user', 'u', InputOption::VALUE_REQUIRED, 'Username', 'user'),
             new InputOption('password', 'p', InputOption::VALUE_REQUIRED, 'Password', 'password'),
             new InputArgument('base-uri', InputArgument::REQUIRED, 'BaseUrl of Sonar service'),
         ]);
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    private function createHtml($data)
+    {
+        /** @var \Twig_Environment $renderer */
+        $renderer = $this->getContainer()['renderer'];
+        return $renderer->render('list_rules.html.twig', compact('data'));
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    private function createCsv($data)
+    {
+        ob_start();
+
+        $resource = fopen('php://output', 'w');
+        fputcsv($resource, array_keys(reset($data['rules'])));
+
+        foreach ($data['rules'] as $row) {
+            fputcsv($resource, $row);
+        }
+
+        fclose($resource);
+
+        return ob_get_clean();
     }
 }
