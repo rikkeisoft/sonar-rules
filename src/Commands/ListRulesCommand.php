@@ -3,11 +3,13 @@
 namespace App\Commands;
 
 use Lemon\Cli\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 class ListRulesCommand extends Command
 {
@@ -22,6 +24,11 @@ class ListRulesCommand extends Command
     protected $apiEndpoint = '/api/rules/search';
 
     /**
+     * @var string
+     */
+    protected $password = '';
+
+    /**
      * Configures the current command.
      */
     protected function configure()
@@ -30,6 +37,30 @@ class ListRulesCommand extends Command
             ->setDefinition($this->createDefinition())
             ->setDescription('Make documents for Sonar rules')
             ->setHelp('TODO');
+    }
+
+    /**
+     * Interacts with the user.
+     *
+     * This method is executed before the InputDefinition is validated.
+     * This means that this is the only place where the command can
+     * interactively ask for values of missing required arguments.
+     *
+     * @param InputInterface  $input  An InputInterface instance
+     * @param OutputInterface $output An OutputInterface instance
+     */
+    protected function interact(InputInterface $input, OutputInterface $output)
+    {
+        if ($input->getOption('password')) {
+            $question = new Question('Please type password for user ' . $input->getOption('user') . ' ?');
+            $question->setHidden(true);
+            $question->setHiddenFallback(false);
+
+            QuestionHelper::disableStty();
+            $helper = $this->getHelper('question');
+
+            $this->password = $helper->ask($input, $output, $question);
+        }
     }
 
     /**
@@ -52,10 +83,11 @@ class ListRulesCommand extends Command
         $baseUri = $input->getArgument('base-uri');
         $query = [
             'format' => 'json',
-            'f' => implode(',', ['repo', 'name', 'htmlDesc', 'htmlNote', 'status']),
+            'f' => implode(',', ['repo', 'name', 'htmlDesc', 'htmlNote', 'status', 'tags']),
             'ps' => 500,
             's' => 'key',
             'asc' => 'true',
+            'tags' => 'rank,rank1,rank2,rank3,rank4,rank5',
         ];
 
         if ($input->hasOption('languages')) {
@@ -63,7 +95,7 @@ class ListRulesCommand extends Command
         }
 
         $user = $input->getOption('user');
-        $password = $input->getOption('password');
+        $password = $this->password;
 
         $response = $client->get($baseUri . $this->apiEndpoint . '?' . http_build_query($query), [
             'auth' => [$user, $password],
@@ -130,8 +162,8 @@ class ListRulesCommand extends Command
             new InputOption('languages', 'l', InputOption::VALUE_OPTIONAL, 'Filter by languages'),
             new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', getcwd() . '/build/file.html'),
             new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'Format', 'html'),
-            new InputOption('user', 'u', InputOption::VALUE_REQUIRED, 'Username', 'user'),
-            new InputOption('password', 'p', InputOption::VALUE_REQUIRED, 'Password', 'password'),
+            new InputOption('user', 'u', InputOption::VALUE_REQUIRED, 'Username', 'admin'),
+            new InputOption('password', 'p', InputOption::VALUE_NONE, 'Password'),
             new InputArgument('base-uri', InputArgument::REQUIRED, 'BaseUrl of Sonar service'),
         ]);
     }
@@ -159,6 +191,11 @@ class ListRulesCommand extends Command
         fputcsv($resource, array_keys(reset($data['rules'])));
 
         foreach ($data['rules'] as $row) {
+            foreach ($row as $index => $field) {
+                if (is_array($field)) {
+                    $row[$index] = implode(',',$field);
+                }
+            }
             fputcsv($resource, $row);
         }
 

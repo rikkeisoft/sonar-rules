@@ -37,7 +37,8 @@
 
                 {% for rule in data.rules %}
                     {% block rule_item %}
-                        <div class="rule-item" id="{{ rule.key | idformat }}">
+                        <div class="rule-item" id="{{ rule.key | idformat }}"
+                             data-tags="{{ rule.tags | join(',') }}">
                             <h2 class="rule-name">{{ rule.name }}</h2>
                             <div class="rule-meta">
                                 <span class="badge badge-default rule-key">{{ rule.key }}</span>
