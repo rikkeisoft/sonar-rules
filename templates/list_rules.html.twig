@@ -66,3 +66,8 @@
         });
     </script>
 {% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    <link rel="stylesheet" href="css/docs.css">
+{% endblock %}
