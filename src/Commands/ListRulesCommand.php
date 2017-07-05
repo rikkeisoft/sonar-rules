@@ -80,7 +80,9 @@ class ListRulesCommand extends Command
     {
         /** @var \GuzzleHttp\Client $client */
         $client = $this->getContainer()['http-client'];
-        $baseUri = $input->getArgument('base-uri');
+        $language = $input->getArgument('language');
+        $baseUri = $input->getOption('uri');
+
         $query = [
             'format' => 'json',
             'f' => implode(',', ['repo', 'name', 'htmlDesc', 'htmlNote', 'status', 'tags']),
@@ -88,11 +90,8 @@ class ListRulesCommand extends Command
             's' => 'key',
             'asc' => 'true',
             'tags' => 'rank,rank1,rank2,rank3,rank4,rank5',
+            'languages' => $language,
         ];
-
-        if ($input->hasOption('languages')) {
-            $query['languages'] = $input->getOption('languages');
-        }
 
         $user = $input->getOption('user');
         $password = $this->password;
@@ -127,7 +126,8 @@ class ListRulesCommand extends Command
             return 3;
         }
 
-        $file = $input->getOption('outfile');
+        $format = strtolower($input->getOption('format')) === 'csv' ? 'csv' : 'html';
+        $file = str_replace(['{lang}', '{format}'], [$language, $format], $input->getOption('outfile'));
         if (!file_exists(dirname($file))) {
             mkdir(dirname($file));
         }
@@ -159,12 +159,13 @@ class ListRulesCommand extends Command
     private function createDefinition()
     {
         return new InputDefinition([
-            new InputOption('languages', 'l', InputOption::VALUE_OPTIONAL, 'Filter by languages'),
-            new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', getcwd() . '/build/file.html'),
+
+            new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', getcwd() . '/build/{lang}.html'),
             new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'Format', 'html'),
             new InputOption('user', 'u', InputOption::VALUE_REQUIRED, 'Username', 'admin'),
             new InputOption('password', 'p', InputOption::VALUE_NONE, 'Password'),
-            new InputArgument('base-uri', InputArgument::REQUIRED, 'BaseUrl of Sonar service'),
+            new InputOption('uri', null, InputOption::VALUE_REQUIRED, 'BaseUrl of Sonar service', 'http://sonar.rikkei.org'),
+            new InputArgument('language', InputArgument::REQUIRED, 'Filter by language'),
         ]);
     }
 

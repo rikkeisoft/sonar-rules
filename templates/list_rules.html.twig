@@ -1,45 +1,25 @@
 {% extends "layouts/default.html.twig" %}
 
-{% block custom_style %}
-<style>
-    pre {
-        background: lightgoldenrodyellow;
-        padding: 10px;
-    }
-    .rule-item { margin-bottom: 3em }
-    .rule-meta { padding-bottom: 0.5em }
-    .rule-desc {
-        border-left: 2px solid #ccc;
-        padding-left: 1.2em;
-    }
-    .rule-desc h2 { font-size: 1.5em }
-    .sidebar li {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
+    <div class="bd-pageheader">
+        <div class="container-fluid">
+            <h1>{{ language | default('PHP') }}</h1>
+            <p class="lead">All {{ data.rules | length }} rules</p>
+        </div>
+    </div>
+
     <!-- Begin page content -->
-    <div class="container">
-        <div class="row">
-
-            <div class="col-sm-8 rule-list">
-
-                <div class="page-header">
-                    <h1 class="page-title">The Sonar rules</h1>
-                    <p class="lead page-description">List all Sonar rules</p>
-                </div><!-- /.page-header -->
-
-                <hr>
-
+    <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-md-9 rule-list">
+                <p class="float-right hidden-md-up sticky-top" style="top: 1rem">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">List</button>
+                </p>
                 {% for rule in data.rules %}
                     {% block rule_item %}
                         <div class="rule-item" id="{{ rule.key | idformat }}"
                              data-tags="{{ rule.tags | join(',') }}">
-                            <h2 class="rule-name">{{ rule.name }}</h2>
+                            <h2 class="rule-name">{{ loop.index }}. {{ rule.name }}</h2>
                             <div class="rule-meta">
                                 <span class="badge badge-default rule-key">{{ rule.key }}</span>
                                 <span class="badge badge-default rule-repo">{{ rule.repo }}</span>
@@ -52,22 +32,144 @@
                         </div><!-- /.rule-item -->
                     {% endblock %}
                 {% endfor %}
+
+                <p class="float-right sticky-bottom">
+                    <a href="#" class="btn btn-primary btn-sm">Top</a>
+                </p>
             </div><!-- /.rule-list -->
 
-            <div class="col-sm-3 offset-sm-1 sidebar sticky-top">
-                <div class="sidebar-module sidebar-module-inset">
-                    <h4>All rules: {{ data.rules | length }}</h4>
-                </div>
-                <div class="sidebar-module">
-                    <h4>Javascripts</h4>
-                    <ol class="list-unstyled">
+            <div class="col-md-3 sidebar-offcanvas sidebar-offcanvas">
+                <div class="sidebar sticky-top">
+                    <ul class="nav flex-column sidebar-module sticky-top">
                         {% for rule in data.rules %}
-                            <li><a href="#{{ rule.key | idformat }}">{{ rule.name }}</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#{{ rule.key | idformat }}">{{ loop.index }}
+                                    . {{ rule.name }}</a>
+                            </li>
                         {% endfor %}
-                    </ol>
-                </div>
-            </div><!-- /.-sidebar -->
+                    </ul>
+                </div><!-- /.-sidebar -->
+            </div>
 
         </div><!-- /.row -->
     </div><!-- /.container -->
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="offcanvas"]').click(function () {
+                $('.row-offcanvas').toggleClass('active')
+            });
+            $('body').scrollspy({target: '.sidebar'});
+        });
+    </script>
+{% endblock %}
+
+{% block custom_style %}
+    <style>
+        body {
+            position: relative;
+        }
+
+        pre {
+            background: lightgoldenrodyellow;
+            padding: 10px;
+        }
+
+        .rule-item {
+            margin-bottom: 3em
+        }
+
+        .rule-meta {
+            padding-bottom: 0.5em
+        }
+
+        .rule-desc {
+            border-left: 2px solid #ccc;
+            padding-left: 1.2em;
+        }
+
+        .rule-desc h2 {
+            font-size: 1.5em
+        }
+
+        .bd-pageheader {
+            padding: 2rem 15px;
+            margin-bottom: 1.5rem;
+            color: #cdbfe3;
+            background-color: #563d7c;
+        }
+
+        /**
+         * Off Canvas
+         * --------------------------------------------------
+         */
+        @media screen and (max-width: 575px) {
+            .row-offcanvas {
+                position: relative;
+                -webkit-transition: all .25s ease-out;
+                -o-transition: all .25s ease-out;
+                transition: all .25s ease-out;
+            }
+
+            .row-offcanvas-right {
+                right: 0;
+            }
+
+            .row-offcanvas-left {
+                left: 0;
+            }
+
+            .row-offcanvas-right
+            .sidebar-offcanvas {
+                right: -100%; /* 12 columns */
+            }
+
+            .row-offcanvas-right.active
+            .sidebar-offcanvas {
+                right: -75%; /* 9 columns */
+            }
+
+            .row-offcanvas-left
+            .sidebar-offcanvas {
+                left: -100%; /* 12 columns */
+            }
+
+            .row-offcanvas-left.active
+            .sidebar-offcanvas {
+                left: -75%; /* 9 columns */
+            }
+
+            .row-offcanvas-right.active {
+                right: 75%; /* 9 columns */
+            }
+
+            .row-offcanvas-left.active {
+                left: 75%; /* 9 columns */
+            }
+
+            .sidebar-offcanvas {
+                position: absolute;
+                top: 0;
+                width: 75%; /* 9 columns */
+            }
+        }
+
+        /**
+         * Nav link
+         * -------------------------------------
+         */
+        .nav-link.active {
+            color: #fff;
+            background-color: #0275d8;
+            border-color: #0275d8;
+        }
+
+        .nav-item {
+            margin-bottom: -1px;
+            border: 1px solid rgba(0, 0, 0, .125);
+        }
+    </style>
 {% endblock %}
