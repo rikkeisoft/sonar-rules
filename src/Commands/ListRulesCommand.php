@@ -36,7 +36,7 @@ class ListRulesCommand extends Command
         $this->setName($this->name)
             ->setDefinition($this->createDefinition())
             ->setDescription('Make documents for Sonar rules')
-            ->setHelp('TODO');
+            ->setHelp("Example: \n\$ php bin/sonardoc rules:list --uri http://sonar.rikkei.org -u oanhnn -p php \n");
     }
 
     /**
@@ -160,11 +160,11 @@ class ListRulesCommand extends Command
     {
         return new InputDefinition([
 
-            new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', getcwd() . '/build/{lang}.html'),
+            new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', './build/{lang}.html'),
             new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'Format', 'html'),
             new InputOption('user', 'u', InputOption::VALUE_REQUIRED, 'Username', 'admin'),
-            new InputOption('password', 'p', InputOption::VALUE_NONE, 'Password'),
-            new InputOption('uri', null, InputOption::VALUE_REQUIRED, 'BaseUrl of Sonar service', 'http://sonar.rikkei.org'),
+            new InputOption('password', 'p', InputOption::VALUE_NONE, 'Typing password'),
+            new InputOption('uri', null, InputOption::VALUE_REQUIRED, 'Sonar service URI', 'http://sonar.rikkei.org'),
             new InputArgument('language', InputArgument::REQUIRED, 'Filter by language'),
         ]);
     }
@@ -194,7 +194,7 @@ class ListRulesCommand extends Command
         foreach ($data['rules'] as $row) {
             foreach ($row as $index => $field) {
                 if (is_array($field)) {
-                    $row[$index] = implode(',',$field);
+                    $row[$index] = implode(',', $field);
                 }
             }
             fputcsv($resource, $row);

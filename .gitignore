@@ -4,7 +4,9 @@
 /phpunit.xml
 /phpcs.xml
 /vendor
-/build
+/build/*.html
+/build/*.csv
+/build/coverage
 
 # IDE and editor specific files #
 #################################
