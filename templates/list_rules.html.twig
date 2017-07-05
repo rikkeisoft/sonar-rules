@@ -3,7 +3,7 @@
 {% block content %}
     <div class="bd-pageheader">
         <div class="container-fluid">
-            <h1>{{ language | default('PHP') }}</h1>
+            <h1>{{ language | default('Some languages') }}</h1>
             <p class="lead">All {{ data.rules | length }} rules</p>
         </div>
     </div>
@@ -21,10 +21,10 @@
                              data-tags="{{ rule.tags | join(',') }}">
                             <h2 class="rule-name">{{ loop.index }}. {{ rule.name }}</h2>
                             <div class="rule-meta">
-                                <span class="badge badge-default rule-key">{{ rule.key }}</span>
                                 <span class="badge badge-default rule-repo">{{ rule.repo }}</span>
-                                <span class="badge badge-default rule-type">{{ rule.type }}</span>
-                                <span class="badge badge-default rule-status">{{ rule.status }}</span>
+                                <span class="badge badge-primary rule-type">{{ rule.type }}</span>
+                                <span class="badge badge-success rule-status">{{ rule.status }}</span>
+                                <span class="badge badge-info rule-rank">{{ getRank(rule.tags) }}</span>
                             </div>
                             <div class="clearfix rule-desc">
                                 {{ rule.htmlDesc | raw }}
@@ -39,6 +39,10 @@
             </div><!-- /.rule-list -->
 
             <div class="col-md-3 sidebar-offcanvas sidebar-offcanvas">
+                <form class="bd-search hidden-sm-down mb-2" style="display: none">
+                    <input type="text" class="form-control" id="search" placeholder="Search..." autocomplete="off">
+                    <div class="dropdown-menu bd-search-results" id="search-results"></div>
+                </form>
                 <div class="sidebar sticky-top">
                     <ul class="nav flex-column sidebar-module sticky-top">
                         {% for rule in data.rules %}

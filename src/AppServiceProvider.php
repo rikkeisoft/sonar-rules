@@ -7,6 +7,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Twig_Environment;
 use Twig_Filter;
+use Twig_Function;
 use Twig_Loader_Filesystem;
 
 class AppServiceProvider implements ServiceProviderInterface
@@ -32,6 +33,10 @@ class AppServiceProvider implements ServiceProviderInterface
             // Extend Twig
             $twig->addFilter(new Twig_Filter('idformat', function ($string) {
                 return preg_replace('/\:/', '-', $string);
+            }));
+
+            $twig->addFunction(new Twig_Function('getRank', function ($tags) {
+                return current(preg_grep('/^rank\d$/', $tags));
             }));
 
             return $twig;

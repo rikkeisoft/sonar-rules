@@ -1,34 +1,35 @@
-body {
-    position: relative;
-}
+body { position: relative }
 
 pre {
     background: lightgoldenrodyellow;
     padding: 10px;
 }
 
-.rule-item {
-    margin-bottom: 3em
-}
+.rule-item { margin-bottom: 3em }
 
-.rule-meta {
-    padding-bottom: 0.5em
-}
+.rule-meta { padding-bottom: 0.5em }
+
+.rule-meta span { margin-right: 0.5em }
 
 .rule-desc {
     border-left: 2px solid #ccc;
     padding-left: 1.2em;
 }
 
-.rule-desc h2 {
-    font-size: 1.5em
-}
+.rule-desc h2 { font-size: 1.5em }
 
 .bd-pageheader {
     padding: 2rem 15px;
     margin-bottom: 1.5rem;
     color: #cdbfe3;
     background-color: #563d7c;
+}
+
+.sidebar {
+    border-top: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    max-height: 100vh;
+    overflow-y: scroll;
 }
 
 /**

@@ -85,7 +85,7 @@ class ListRulesCommand extends Command
 
         $query = [
             'format' => 'json',
-            'f' => implode(',', ['repo', 'name', 'htmlDesc', 'htmlNote', 'status', 'tags']),
+            'f' => implode(',', ['repo', 'name', 'htmlDesc', 'htmlNote', 'status', 'tags', 'langName']),
             'ps' => 500,
             's' => 'key',
             'asc' => 'true',
@@ -177,7 +177,9 @@ class ListRulesCommand extends Command
     {
         /** @var \Twig_Environment $renderer */
         $renderer = $this->getContainer()['renderer'];
-        return $renderer->render('list_rules.html.twig', compact('data'));
+        $language = (count($data['rules']) > 0) ? $data['rules']['0']['langName'] : null;
+
+        return $renderer->render('list_rules.html.twig', compact('data', 'language'));
     }
 
     /**
