@@ -14,13 +14,14 @@ Make documents about Sonar rules
 ## Installation
 
 ```bash
-$ composer require rikkeisoft/sonar-rules
+$ git clone https://github.com/rikkeisoft/sonar-rules project-dir
+$ composer install
 ```
 
 ## Usage
 
 ```bash
-$ php vendor/bin/sonardoc
+$ php bin/sonardoc rules:list -u <username> -p <language>
 ```
 
 ## Changelog
