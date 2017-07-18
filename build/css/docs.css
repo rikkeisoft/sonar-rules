@@ -4,7 +4,14 @@ pre {
     background: lightgoldenrodyellow;
     padding: 10px;
 }
+nav.navbar {
+    margin-bottom: 1em;
+}
 
+/**
+ * Rule
+ * --------------------------------------------------
+ */
 .rule-item { margin-bottom: 3em }
 
 .rule-meta { padding-bottom: 0.5em }
@@ -17,20 +24,6 @@ pre {
 }
 
 .rule-desc h2 { font-size: 1.5em }
-
-.bd-pageheader {
-    padding: 2rem 15px;
-    margin-bottom: 1.5rem;
-    color: #cdbfe3;
-    background-color: #563d7c;
-}
-
-.sidebar {
-    border-top: 1px solid rgba(0, 0, 0, .125);
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
-    max-height: 100vh;
-    overflow-y: scroll;
-}
 
 /**
  * Off Canvas
@@ -88,16 +81,23 @@ pre {
 }
 
 /**
- * Nav link
+ * Sidebar Nav link
  * -------------------------------------
  */
-.nav-link.active {
+.sidebar {
+    border-top: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+.sidebar-module .nav-link.active {
     color: #fff;
     background-color: #0275d8;
     border-color: #0275d8;
 }
 
-.nav-item {
+.sidebar-module .nav-item {
     margin-bottom: -1px;
     border: 1px solid rgba(0, 0, 0, .125);
 }

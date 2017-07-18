@@ -1,0 +1,129 @@
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,600&subset=latin,vietnamese);
+// Variables
+@import "variables";
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-vue/dist/bootstrap-vue.css";
+
+/**
+ * Common
+ * -------------------------------------------------
+ */
+body {
+  position: relative;
+}
+
+pre {
+  background: lightgoldenrodyellow;
+  padding: 10px;
+}
+
+nav.navbar {
+  margin-bottom: 1em;
+}
+
+/**
+ * Rule
+ * --------------------------------------------------
+ */
+.rule-list {
+  position: relative;
+}
+
+.rule-item {
+  margin-bottom: 3em;
+
+  .rule-meta {
+    padding-bottom: 0.5em;
+
+    span {
+      margin-right: 0.5em;
+    }
+  }
+
+  .rule-desc {
+    border-left: 2px solid #ccc;
+    padding-left: 1.2em;
+
+    h2 {
+      font-size: 1.5em;
+    }
+  }
+}
+
+/**
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 575px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 75%; /* 9 columns */
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+
+    .sidebar-offcanvas {
+      right: -100%; /* 12 columns */
+    }
+
+    &.active {
+      right: 75%; /* 9 columns */
+
+      .sidebar-offcanvas {
+        right: -75%; /* 9 columns */
+      }
+    }
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+
+    .sidebar-offcanvas {
+      left: -100%; /* 12 columns */
+    }
+
+    &.active {
+      left: 75%; /* 9 columns */
+
+      .sidebar-offcanvas {
+        left: -75%; /* 9 columns */
+      }
+    }
+  }
+
+}
+
+/**
+ * Sidebar Nav link
+ * -------------------------------------
+ */
+.sidebar {
+  border-top: 1px solid rgba(0, 0, 0, .125);
+  border-bottom: 1px solid rgba(0, 0, 0, .125);
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+.sidebar-module {
+  .nav-link.active {
+    color: #fff;
+    background-color: #0275d8;
+    border-color: #0275d8;
+  }
+
+  .nav-item {
+    margin-bottom: -1px;
+    border: 1px solid rgba(0, 0, 0, .125);
+  }
+}

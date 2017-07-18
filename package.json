@@ -1,0 +1,36 @@
+{
+  "name": "sonar-rules",
+  "version": "1.0.0",
+  "description": "Make documents about Sonar rules",
+  "private": true,
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rikkeisoft/sonar-rules.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rikkeisoft/sonar-rules/issues"
+  },
+  "homepage": "https://github.com/rikkeisoft/sonar-rules#readme",
+  "devDependencies": {
+    "laravel-mix": "^1.2.2"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap-vue": "^0.18.0",
+    "vue": "^2.4.1"
+  }
+}

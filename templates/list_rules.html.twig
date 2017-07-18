@@ -1,13 +1,7 @@
 {% extends "layouts/default.html.twig" %}
+{% block title %}Coding Rules{% endblock %}
 
 {% block content %}
-    <div class="bd-pageheader">
-        <div class="container-fluid">
-            <h1>{{ language | default('Some languages') }}</h1>
-            <p class="lead">All {{ data.rules | length }} rules</p>
-        </div>
-    </div>
-
     <!-- Begin page content -->
     <div class="container-fluid">
         <div class="row row-offcanvas row-offcanvas-right">

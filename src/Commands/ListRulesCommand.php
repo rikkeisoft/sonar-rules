@@ -29,6 +29,18 @@ class ListRulesCommand extends Command
     protected $password = '';
 
     /**
+     * @var array
+     */
+    protected $languages = [
+        'cs' => 'C#',
+        'java' => 'Java',
+        'js' => 'JavaScript',
+        'objc' => 'Objective C',
+        'php' => 'PHP',
+        'swift' => 'Swift',
+    ];
+
+    /**
      * Configures the current command.
      */
     protected function configure()
@@ -133,9 +145,9 @@ class ListRulesCommand extends Command
         }
 
         if (strtolower($input->getOption('format')) === 'csv') {
-            $doc = $this->createCsv($data);
+            $doc = $this->createCsv($data, $language);
         } else {
-            $doc = $this->createHtml($data);
+            $doc = $this->createHtml($data, $language);
         }
 
         if (!file_put_contents($file, $doc)) {
@@ -159,7 +171,6 @@ class ListRulesCommand extends Command
     private function createDefinition()
     {
         return new InputDefinition([
-
             new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', './build/{lang}.html'),
             new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'Format', 'html'),
             new InputOption('user', 'u', InputOption::VALUE_REQUIRED, 'Username', 'admin'),
@@ -171,22 +182,26 @@ class ListRulesCommand extends Command
 
     /**
      * @param array $data
+     * @param string $language
      * @return string
      */
-    private function createHtml($data)
+    private function createHtml($data, $language)
     {
         /** @var \Twig_Environment $renderer */
         $renderer = $this->getContainer()['renderer'];
-        $language = (count($data['rules']) > 0) ? $data['rules']['0']['langName'] : null;
 
-        return $renderer->render('list_rules.html.twig', compact('data', 'language'));
+        $data['language'] = $language;
+        $data['languages'] = $this->languages;
+
+        return $renderer->render('index.html.twig', compact('data'));
     }
 
     /**
      * @param array $data
+     * @param string $language
      * @return string
      */
-    private function createCsv($data)
+    private function createCsv($data, $language)
     {
         ob_start();
 

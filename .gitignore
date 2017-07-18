@@ -4,9 +4,11 @@
 /phpunit.xml
 /phpcs.xml
 /vendor
-/build/*.html
+/node_modules
+/npm-debug.log
 /build/*.csv
 /build/coverage
+/build/mix-manifest.json
 
 # IDE and editor specific files #
 #################################

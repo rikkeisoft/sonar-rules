@@ -1,0 +1,107 @@
+/**
+ * Colors
+ *
+ * Grayscale and brand colors for use across Bootstrap.
+ */
+// Start with assigning color names to specific hex values.
+$white:   #fff;
+$black:   #000;
+$red:     #d9534f;
+$orange:  #f0ad4e;
+$yellow:  #ffd500;
+$green:   #5cb85c;
+$blue:    #0275d8;
+$teal:    #5bc0de;
+$pink:    #ff5b77;
+$purple:  #613d7c;
+
+// Create grayscale
+$gray-dark:     #292b2c;
+$gray:          #464a4c;
+$gray-light:    #636c72;
+$gray-lighter:  #eceeef;
+$gray-lightest: #f7f7f9;
+
+// Reassign color vars to semantic color scheme
+$brand-primary: $blue;
+$brand-success: $green;
+$brand-info:    $teal;
+$brand-warning: $orange;
+$brand-danger:  $red;
+$brand-inverse: $gray-dark;
+
+/**
+ * Options
+ *
+ * Quickly modify global styling by enabling or disabling optional features.
+ */
+$enable-rounded:            true;
+$enable-shadows:            false;
+$enable-gradients:          false;
+$enable-transitions:        true;
+$enable-hover-media-query:  false;
+$enable-grid-classes:       true;
+$enable-print-styles:       true;
+
+/**
+ * Spacing
+ *
+ * Control the default styling of most Bootstrap elements by modifying these
+ * variables. Mostly focused on spacing.
+ * You can add more entries to the $spacers map, should you need more variation.
+ */
+$spacer:   1rem;
+
+/**
+ * Body
+ *
+ * Settings for the `<body>` element.
+ */
+$body-bg:       $white;
+$body-color:    $gray-dark;
+$inverse-bg:    $gray-dark;
+$inverse-color: $gray-lighter;
+
+/**
+ * Fonts
+ *
+ * Font, line-height, and color for body text, headings, and more.
+ */
+$font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-serif:      Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-base:       $font-family-sans-serif;
+
+$font-size-base: 1.000rem; // Assumes the browser default, typically `16px`
+$font-size-lg:   1.250rem;
+$font-size-sm:   0.875rem;
+$font-size-xs:   0.750rem;
+
+$font-weight-normal: normal;
+$font-weight-bold:   bold;
+
+$font-weight-base: $font-weight-normal;
+$line-height-base: 1.5;
+
+$font-size-h1: 2.50rem;
+$font-size-h2: 2.00rem;
+$font-size-h3: 1.75rem;
+$font-size-h4: 1.50rem;
+$font-size-h5: 1.25rem;
+$font-size-h6: 1.00rem;
+
+/**
+ * Z-index master list
+ *
+ * Warning: Avoid customizing these values. They're used for a bird's eye view
+ * of components dependent on the z-axis and are designed to all work together.
+ */
+$zindex-dropdown-backdrop:  990;
+$zindex-navbar:             1000;
+$zindex-dropdown:           1000;
+$zindex-fixed:              1030;
+$zindex-sticky:             1030;
+$zindex-modal-backdrop:     1040;
+$zindex-modal:              1050;
+$zindex-popover:            1060;
+$zindex-tooltip:            1070;
