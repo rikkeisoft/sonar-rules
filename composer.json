@@ -32,7 +32,7 @@
   },
   "bin": ["bin/sonardoc"],
   "scripts": {
-    "phpunit": "php vendor/phpunit/phpunit/phpunit --coverage-html build/",
+    "phpunit": "php vendor/phpunit/phpunit/phpunit --coverage-html docs/coverage",
     "phpcs": "php vendor/squizlabs/php_codesniffer/bin/phpcs",
     "phpcbf": "php vendor/squizlabs/php_codesniffer/bin/phpcbf"
   },

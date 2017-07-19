@@ -6,9 +6,9 @@
 /vendor
 /node_modules
 /npm-debug.log
-/build/*.csv
-/build/coverage
-/build/mix-manifest.json
+/docs/*.csv
+/docs/coverage
+/docs/mix-manifest.json
 
 # IDE and editor specific files #
 #################################

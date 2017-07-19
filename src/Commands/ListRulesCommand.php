@@ -38,6 +38,7 @@ class ListRulesCommand extends Command
         'objc' => 'Objective C',
         'php' => 'PHP',
         'swift' => 'Swift',
+        'vbnet' => 'VB.NET',
     ];
 
     /**
@@ -171,7 +172,7 @@ class ListRulesCommand extends Command
     private function createDefinition()
     {
         return new InputDefinition([
-            new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', './build/{lang}.html'),
+            new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', './docs/{lang}.html'),
             new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'Format', 'html'),
             new InputOption('user', 'u', InputOption::VALUE_REQUIRED, 'Username', 'admin'),
             new InputOption('password', 'p', InputOption::VALUE_NONE, 'Typing password'),

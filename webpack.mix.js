@@ -11,11 +11,11 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.copyDirectory('templates/img', 'build/img')
+mix.copyDirectory('templates/img', 'docs/img')
     .disableNotifications()
-    .setPublicPath('build')
-    .js('templates/js/app.js', 'build/js')
-    .sass('templates/sass/app.scss', 'build/css')
+    .setPublicPath('docs')
+    .js('templates/js/app.js', 'docs/js')
+    .sass('templates/sass/app.scss', 'docs/css')
 ;
 
 // Full API
