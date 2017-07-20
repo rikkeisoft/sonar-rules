@@ -39,6 +39,7 @@ class ListRulesCommand extends Command
         'php' => 'PHP',
         'swift' => 'Swift',
         'vbnet' => 'VB.NET',
+        'android' => 'Android',
     ];
 
     /**
@@ -102,9 +103,15 @@ class ListRulesCommand extends Command
             'ps' => 500,
             's' => 'key',
             'asc' => 'true',
-            'tags' => 'rank,rank1,rank2,rank3,rank4,rank5',
+            'tags' => 'rank1,rank2,rank3,rank4,rank5',
             'languages' => $language,
         ];
+
+        // Special android to java
+        if ($language === 'android') {
+            $query['languages'] = 'java';
+            $query['tags'] = 'android-rank1,android-rank2,android-rank3,android-rank4,android-rank5';
+        }
 
         $user = $input->getOption('user');
         $password = $this->password;
@@ -171,13 +178,15 @@ class ListRulesCommand extends Command
      */
     private function createDefinition()
     {
+        $languages = implode(', ', array_keys($this->languages));
+
         return new InputDefinition([
             new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', './docs/{lang}.html'),
             new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'Format', 'html'),
             new InputOption('user', 'u', InputOption::VALUE_REQUIRED, 'Username', 'admin'),
             new InputOption('password', 'p', InputOption::VALUE_NONE, 'Typing password'),
             new InputOption('uri', null, InputOption::VALUE_REQUIRED, 'Sonar service URI', 'http://sonar.rikkei.org'),
-            new InputArgument('language', InputArgument::REQUIRED, 'Filter by language'),
+            new InputArgument('language', InputArgument::REQUIRED, 'Filter by language. Options: ' . $languages),
         ]);
     }
 
