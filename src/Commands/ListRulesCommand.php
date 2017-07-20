@@ -202,6 +202,7 @@ class ListRulesCommand extends Command
 
         $data['language'] = $language;
         $data['languages'] = $this->languages;
+        $data['ranktag'] = ($language === 'android') ? '^android\\-rank\\d$' : '^rank\\d$';
 
         return $renderer->render('index.html.twig', compact('data'));
     }

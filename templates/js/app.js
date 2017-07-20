@@ -18,6 +18,8 @@ const app = new Vue({
         }
     },
     created() {
+        let rankTest = new RegExp(this.rankPattern)
+
         this.orgRules.forEach(item => {
             Object.defineProperty(item, 'id', {
                 get: function () {
@@ -27,7 +29,7 @@ const app = new Vue({
 
             Object.defineProperty(item, 'rank', {
                 get: function () {
-                    return Array.filter(this.tags, tag => (/^rank\d$/.test(tag)))[0]
+                    return String(Array.filter(this.tags, tag => (rankTest.test(tag)))[0]).replace(/^android\-/, '')
                 }
             })
         })
@@ -47,6 +49,7 @@ const app = new Vue({
             orgRules: window.data.rules || [],
             language: window.data.language || '',
             languages: window.data.languages || {},
+            rankPattern: window.data.ranktag || '^rank\\d$',
             paging: {
                 total: window.data.total || 0,
                 page: window.data.p || 1,
