@@ -24,6 +24,13 @@ $ composer install
 $ php bin/sonardoc rules:list -u <username> -p <language>
 ```
 
+## Build assets
+
+```bash
+$ npm install
+$ npm run prod
+```
+
 ## Changelog
 
 See all change logs in [CHANGELOG.md][changelog]

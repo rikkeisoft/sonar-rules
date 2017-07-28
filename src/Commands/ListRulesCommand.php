@@ -65,7 +65,7 @@ class ListRulesCommand extends Command
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
-        if ($input->getOption('password')) {
+        if ($input->getOption('user')) {
             $question = new Question('Please type password for user ' . $input->getOption('user') . ' ?');
             $question->setHidden(true);
             $question->setHiddenFallback(false);
@@ -99,7 +99,7 @@ class ListRulesCommand extends Command
 
         $query = [
             'format' => 'json',
-            'f' => implode(',', ['repo', 'name', 'htmlDesc', 'htmlNote', 'status', 'tags', 'langName']),
+            'f' => implode(',', ['repo', 'name', 'htmlDesc', 'htmlNote', 'status', 'tags', 'langName', 'params']),
             'ps' => 500,
             's' => 'key',
             'asc' => 'true',
@@ -114,11 +114,14 @@ class ListRulesCommand extends Command
         }
 
         $user = $input->getOption('user');
-        $password = $this->password;
 
-        $response = $client->get($baseUri . $this->apiEndpoint . '?' . http_build_query($query), [
-            'auth' => [$user, $password],
-        ]);
+        if (!empty($user)) {
+            $response = $client->get($baseUri . $this->apiEndpoint . '?' . http_build_query($query), [
+                'auth' => [$user, $this->password],
+            ]);
+        } else {
+            $response = $client->get($baseUri . $this->apiEndpoint . '?' . http_build_query($query));
+        }
 
         if ($response->getStatusCode() != 200) {
             if ($output->isDebug()) {
@@ -183,8 +186,7 @@ class ListRulesCommand extends Command
         return new InputDefinition([
             new InputOption('outfile', 'o', InputOption::VALUE_REQUIRED, 'Save file', './docs/{lang}.html'),
             new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'Format', 'html'),
-            new InputOption('user', 'u', InputOption::VALUE_REQUIRED, 'Username', 'admin'),
-            new InputOption('password', 'p', InputOption::VALUE_NONE, 'Typing password'),
+            new InputOption('user', 'u', InputOption::VALUE_OPTIONAL, 'Username'),
             new InputOption('uri', null, InputOption::VALUE_REQUIRED, 'Sonar service URI', 'http://sonar.rikkei.org'),
             new InputArgument('language', InputArgument::REQUIRED, 'Filter by language. Options: ' . $languages),
         ]);

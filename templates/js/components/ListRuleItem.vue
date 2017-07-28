@@ -12,6 +12,19 @@
         </div>
         <div class="clearfix rule-desc">
             <div v-html="rule.htmlDesc"></div>
+            <h2 v-if="rule.params.length">Parameters</h2>
+            <table v-if="rule.params.length" class="table">
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                </tr>
+                <tr v-for="param in rule.params">
+                    <td><code>{{param.key}}</code> - <span v-html="param.htmlDesc"></span></td>
+                    <td><code>{{param.type}}</code></td>
+                    <td>{{param.defaultValue}}</td>
+                </tr>
+            </table>
         </div>
     </div><!-- /.rule-item -->
 </template>
