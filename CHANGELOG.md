@@ -1,25 +1,19 @@
 Changelog
 ===
-All Notable changes to project will be documented in this file
+All notable changes to project will be documented in this file
 
 
 ## NEXT - YYYY-MM-DD
+- Change content
 
-### Added
-- Nothing
 
-### Deprecated
-- Nothing
+## v0.1.1 - 2017-09-06
 
-### Fixed
-- Nothing
+- Add Yarn.lock.
+- Use Bootstrap 4 Beta.
+- Use Bootstrap Vue 1.0.0 beta 7.
+- Update rules of Java, PHP, Android.
 
-### Removed
-- Nothing
+## v0.1.0 - 2017-06-15
 
-### Security
-- Nothing
-
-## Version 0.1.0 - 2017-06-15
-
-The first release
+- The first release

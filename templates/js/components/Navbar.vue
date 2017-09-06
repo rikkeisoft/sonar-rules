@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable type="inverse" variant="danger">
+    <b-navbar toggleable="md" type="dark" variant="danger">
         <b-nav-toggle target="nav-collapse"></b-nav-toggle>
         <b-link class="navbar-brand" to="#">
             <img src="img/rikkei-white.png" height="50" class="d-inline-block align-top" alt="">

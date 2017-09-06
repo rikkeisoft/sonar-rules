@@ -5,7 +5,7 @@
     >
         <h2 class="rule-name">{{ index }}. {{ rule.name }}</h2>
         <div class="rule-meta">
-            <span class="badge badge-default rule-repo">{{ rule.repo }}</span>
+            <span class="badge badge-dark rule-repo">{{ rule.repo }}</span>
             <span class="badge badge-primary rule-type">{{ rule.type }}</span>
             <span class="badge badge-success rule-status">{{ rule.status }}</span>
             <span class="badge badge-info rule-rank">{{ rule.rank }}</span>

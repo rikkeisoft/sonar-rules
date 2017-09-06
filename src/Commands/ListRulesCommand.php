@@ -40,6 +40,7 @@ class ListRulesCommand extends Command
         'swift' => 'Swift',
         'vbnet' => 'VB.NET',
         'android' => 'Android',
+        'py' => 'Python',
     ];
 
     /**
@@ -50,7 +51,7 @@ class ListRulesCommand extends Command
         $this->setName($this->name)
             ->setDefinition($this->createDefinition())
             ->setDescription('Make documents for Sonar rules')
-            ->setHelp("Example: \n\$ php bin/sonardoc rules:list --uri http://sonar.rikkei.org -u oanhnn -p php \n");
+            ->setHelp("Example: \n\$ php bin/sonardoc rules:list --uri http://sonar.rikkei.org -u oanhnn php \n");
     }
 
     /**

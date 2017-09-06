@@ -6,16 +6,16 @@
     <div class="container-fluid">
         <div class="row row-offcanvas row-offcanvas-right">
             <div class="col-md-9 rule-list">
-                <p class="float-right hidden-md-up sticky-top" style="top: 1rem">
+                <!--<p class="float-right hidden-md-up sticky-top" style="top: 1rem">
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">List</button>
-                </p>
+                </p>-->
                 {% for rule in data.rules %}
                     {% block rule_item %}
                         <div class="rule-item" id="{{ rule.key | idformat }}"
                              data-tags="{{ rule.tags | join(',') }}">
                             <h2 class="rule-name">{{ loop.index }}. {{ rule.name }}</h2>
                             <div class="rule-meta">
-                                <span class="badge badge-default rule-repo">{{ rule.repo }}</span>
+                                <span class="badge badge-dark rule-repo">{{ rule.repo }}</span>
                                 <span class="badge badge-primary rule-type">{{ rule.type }}</span>
                                 <span class="badge badge-success rule-status">{{ rule.status }}</span>
                                 <span class="badge badge-info rule-rank">{{ getRank(rule.tags) }}</span>

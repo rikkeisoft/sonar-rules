@@ -14,21 +14,25 @@ Make documents about Sonar rules
 ## Installation
 
 ```bash
-$ git clone https://github.com/rikkeisoft/sonar-rules project-dir
+$ git clone https://github.com/rikkeisoft/sonar-rules
 $ composer install
 ```
 
 ## Usage
 
 ```bash
-$ php bin/sonardoc rules:list -u <username> -p <language>
+$ php bin/sonardoc rules:list -u <username> <language>
+# Example
+$ php bin/sonardoc rules:list -u huynq js
 ```
 
 ## Build assets
 
+- **Note**: [Yarn](https://yarnpkg.com/en/docs/install) have to be installed.
+
 ```bash
-$ npm install
-$ npm run prod
+$ yarn install
+$ yarn run prod
 ```
 
 ## Changelog

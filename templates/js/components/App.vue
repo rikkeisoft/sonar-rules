@@ -4,9 +4,9 @@
         <div class="container-fluid">
             <div class="row row-offcanvas row-offcanvas-right">
                 <div class="col-md-9">
-                    <p class="float-right hidden-md-up sticky-top" style="top: 1rem">
+                    <!--<p class="float-right hidden-md-up sticky-top" style="top: 1rem">
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">List</button>
-                    </p>
+                    </p>-->
                     <list-rule id="list-rules"></list-rule>
 
                     <p class="float-right sticky-bottom">

@@ -8,7 +8,7 @@
         <img src="img/rikkei-white.png" height="50" class="d-inline-block align-top" alt="">
     </a>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
+        <ul class="nav mr-auto">
             {% for code, lang in languages %}
                 <li class="nav-item {% if code == language %}active{% endif %}">
                     <a class="nav-link" href="{{ code }}.html">{{ lang }}</a>
