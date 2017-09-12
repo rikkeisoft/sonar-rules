@@ -860,7 +860,7 @@ bootstrap-vue@^1.0.0-beta.7:
     vue "^2.4.2"
     vue-functional-data-merge "^1.0.6"
 
-bootstrap@^4.0.0-alpha.6, bootstrap@^4.0.0-beta:
+bootstrap@^4.0.0-beta:
   version "4.0.0-beta"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0-beta.tgz#dc5928175d2e71310bc668cf9e05a907211b72a6"
 
@@ -3210,9 +3210,9 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-laravel-mix@^1.2.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-1.4.2.tgz#5fff0434c98c027e68ffb28c3f54bac95d7e2d1f"
+laravel-mix@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-1.4.3.tgz#7e42888bb1663026a3cea57af4dc5dcae2ffab3b"
   dependencies:
     autoprefixer "^7.1.1"
     babel-core "^6.24.1"
@@ -3241,8 +3241,8 @@ laravel-mix@^1.2.2:
     uglify-js "^2.8.28"
     uglifyjs-webpack-plugin "^0.4.6"
     vue-loader "^12.1.1"
-    vue-template-compiler "^2.3.3"
-    webpack "^3.4.0"
+    vue-template-compiler "^2.4.2"
+    webpack "^3.5.0"
     webpack-chunk-hash "^0.4.0"
     webpack-dev-server "^2.5.1"
     webpack-merge "^4.1.0"
@@ -5843,7 +5843,7 @@ vue-style-loader@^3.0.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.3.3:
+vue-template-compiler@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.4.2.tgz#5a45d843f148b098f6c1d1e35ac20c4956d30ad1"
   dependencies:
@@ -5941,9 +5941,9 @@ webpack-sources@^1.0.1:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
 
-webpack@^3.4.0:
-  version "3.5.5"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.5.5.tgz#3226f09fc8b3e435ff781e7af34f82b68b26996c"
+webpack@^3.5.0:
+  version "3.5.6"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.5.6.tgz#a492fb6c1ed7f573816f90e00c8fbb5a20cc5c36"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
