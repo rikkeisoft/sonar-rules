@@ -9,6 +9,7 @@
 /docs/*.csv
 /docs/coverage
 /docs/mix-manifest.json
+.env
 
 # IDE and editor specific files #
 #################################

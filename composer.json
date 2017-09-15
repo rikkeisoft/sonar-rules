@@ -13,13 +13,18 @@
     {
       "name": "Oanh Nguyen",
       "email": "oanhnn.bk@gmail.com"
+    },
+    {
+      "name": "Huy Nguyen Quang",
+      "email": "huy@huynq.net"
     }
   ],
   "require": {
     "php": ">=7.0",
     "guzzlehttp/guzzle": "^6.3",
     "lemonphp/cli": "^0.2.0",
-    "twig/twig": "^2.0"
+    "twig/twig": "^2.0",
+    "vlucas/phpdotenv": "^2.4"
   },
   "require-dev": {
     "phpunit/phpunit": "~6.0",

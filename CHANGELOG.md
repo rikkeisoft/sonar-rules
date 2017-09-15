@@ -7,6 +7,11 @@ All notable changes to project will be documented in this file
 - Change content
 
 
+## v0.1.2 - 2017-09-15
+
+- Add Python's rules
+- Skip `-u` option by using credential from `.env`
+
 ## v0.1.1 - 2017-09-06
 
 - Add Yarn.lock.

@@ -16,17 +16,22 @@ class ListRulesCommand extends Command
     /**
      * @var string
      */
-    protected $name = 'rules:list';
+    protected $username = null;
+
+    /**
+     * @var string
+     */
+    protected $password = null;
+
+    /**
+     * @var string
+     */
+    protected $commandName = 'rules:list';
 
     /**
      * @var string
      */
     protected $apiEndpoint = '/api/rules/search';
-
-    /**
-     * @var string
-     */
-    protected $password = '';
 
     /**
      * @var array
@@ -39,7 +44,8 @@ class ListRulesCommand extends Command
         'php' => 'PHP',
         'swift' => 'Swift',
         'vbnet' => 'VB.NET',
-        'android' => 'Android'
+        'android' => 'Android',
+        'py' => 'Python'
     ];
 
     /**
@@ -47,7 +53,7 @@ class ListRulesCommand extends Command
      */
     protected function configure()
     {
-        $this->setName($this->name)
+        $this->setName($this->commandName)
             ->setDefinition($this->createDefinition())
             ->setDescription('Make documents for Sonar rules')
             ->setHelp("Example: \n\$ php bin/sonardoc rules:list --uri http://sonar.rikkei.org -u oanhnn php \n");
@@ -66,7 +72,8 @@ class ListRulesCommand extends Command
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         if ($input->getOption('user')) {
-            $question = new Question('Please type password for user ' . $input->getOption('user') . ' ?');
+            $this->username = $input->getOption('user');
+            $question = new Question('Please type password for user ' . $this->username . ' ?');
             $question->setHidden(true);
             $question->setHiddenFallback(false);
 
@@ -97,6 +104,9 @@ class ListRulesCommand extends Command
         $language = $input->getArgument('language');
         $baseUri = $input->getOption('uri');
 
+        $this->username = $this->username ?? getenv('SONAR_USER');
+        $this->password = $this->password ?? getenv('SONAR_PASSWORD');
+
         $query = [
             'format' => 'json',
             'f' => implode(',', ['repo', 'name', 'htmlDesc', 'htmlNote', 'status', 'tags', 'langName', 'params']),
@@ -113,11 +123,9 @@ class ListRulesCommand extends Command
             $query['tags'] = 'android-rank1,android-rank2,android-rank3,android-rank4,android-rank5';
         }
 
-        $user = $input->getOption('user');
-
-        if (!empty($user)) {
+        if (!empty($this->username)) {
             $response = $client->get($baseUri . $this->apiEndpoint . '?' . http_build_query($query), [
-                'auth' => [$user, $this->password],
+                'auth' => [$this->username, $this->password],
             ]);
         } else {
             $response = $client->get($baseUri . $this->apiEndpoint . '?' . http_build_query($query));
@@ -170,7 +178,7 @@ class ListRulesCommand extends Command
         }
 
         if ($output->isDebug()) {
-            $output->writeln("<info>Generate success</info>");
+            $output->writeln("<info>Documents generated successfully.</info>");
         }
 
         return 0;

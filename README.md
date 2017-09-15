@@ -20,10 +20,22 @@ $ composer install
 
 ## Usage
 
+- You could specify your Sonar's credential in CLI arguments:
+
 ```bash
 $ php bin/sonardoc rules:list -u <username> <language>
 # Example
 $ php bin/sonardoc rules:list -u huynq js
+```
+
+- Or you can set your Sonar's username and password in `.env`:
+
+```bash
+$ cp .env{.example,}
+# Edit the value of .env to yours
+$ php bin/sonardoc rules:list <language>
+# Example
+$ php bin/sonardoc rules:list js
 ```
 
 ## Build assets

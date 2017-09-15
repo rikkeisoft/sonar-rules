@@ -3,7 +3,10 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$app = new \Lemon\Cli\App('Make documents about Sonar rules', '1.0.0');
+$dotenv = new Dotenv\Dotenv(dirname(__DIR__));
+$dotenv->load();
+
+$app = new \Lemon\Cli\App('Make documents about Sonar rules', '0.1.2');
 $app->register(new \App\AppServiceProvider());
 $app->addCommand(new \App\Commands\ListRulesCommand());
 
