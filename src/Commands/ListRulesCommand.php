@@ -39,8 +39,7 @@ class ListRulesCommand extends Command
         'php' => 'PHP',
         'swift' => 'Swift',
         'vbnet' => 'VB.NET',
-        'android' => 'Android',
-        'py' => 'Python',
+        'android' => 'Android'
     ];
 
     /**
