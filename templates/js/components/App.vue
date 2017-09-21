@@ -27,14 +27,14 @@
     </div>
 </template>
 <script>
-    import navbar from './Navbar.vue'
-    import listRule from './ListRule.vue'
-    import sidebar from './Sidebar.vue'
-    export default {
-        components: {
-            navbar,
-            listRule,
-            sidebar,
-        },
-    }
+import navbar from './Navbar.vue'
+import listRule from './ListRule.vue'
+import sidebar from './Sidebar.vue'
+export default {
+  components: {
+    navbar,
+    listRule,
+    sidebar,
+  },
+}
 </script>

@@ -30,16 +30,16 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            index: {
-                type: Number,
-                required: true,
-            },
-            rule: {
-                type: Object,
-                required: true,
-            }
-        }
+export default {
+  props: {
+    index: {
+      type: Number,
+      required: true,
+    },
+    rule: {
+      type: Object,
+      required: true,
     }
+  }
+}
 </script>

@@ -11,22 +11,22 @@
     </div><!-- /.-sidebar -->
 </template>
 <script>
-    export default {
-        methods: {
-            toHref(rule) {
-                return '#' + rule.id
-            },
-            scrollIntoView($event) {
-                const href = $event.target.getAttribute('href')
-                if (href) {
-                    const el = document.querySelector(href)
-                    if (el) {
-                        el.scrollIntoView({
-                            behavior: 'smooth'
-                        })
-                    }
-                }
-            }
+export default {
+  methods: {
+    toHref(rule) {
+      return '#' + rule.id
+    },
+    scrollIntoView($event) {
+      const href = $event.target.getAttribute('href')
+      if (href) {
+        const el = document.querySelector(href)
+        if (el) {
+          el.scrollIntoView({
+            behavior: 'smooth'
+          })
         }
+      }
     }
+  }
+}
 </script>

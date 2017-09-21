@@ -7,8 +7,8 @@
 </template>
 
 <script>
-    import listRuleItem from './ListRuleItem.vue'
-    export default {
-        components: {listRuleItem},
-    }
+import listRuleItem from './ListRuleItem.vue'
+export default {
+  components: {listRuleItem},
+}
 </script>
